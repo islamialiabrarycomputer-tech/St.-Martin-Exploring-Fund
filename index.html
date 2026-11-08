@@ -76,4 +76,4 @@ function renderRequests(){let rows=requests.map((r,i)=>`<tr><td>${r.name}</td><t
 function setStatus(i,s){requests[i].status=s;renderRequests()}
 function addMember(){let name=document.getElementById("mName").value.trim(),phone=document.getElementById("mPhone").value.trim(),plan=document.getElementById("mPlan").value,amount=Number(document.getElementById("mAmount").value);if(!name||!phone||!amount||amount<1){document.getElementById("memberMsg").textContent="সব তথ্য সঠিকভাবে পূরণ করুন।";return}members.push({id:"SMEF-"+String(members.length+1).padStart(3,"0"),name,phone,plan,amount});renderMembers();document.getElementById("memberMsg").textContent="ডেমো গ্রাহক যোগ হয়েছে। বাস্তব ডাটাবেজে সংরক্ষিত হয়নি।";["mName","mPhone","mAmount"].forEach(id=>document.getElementById(id).value="")}
 renderMembers();renderRequests();
-</script></body></html>
+</script></body></html>  
