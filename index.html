@@ -18,7 +18,15 @@ table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;colo
 @media(max-width:900px){.layout{grid-template-columns:1fr}aside{padding:12px;gap:12px}.brand{justify-content:center}nav{display:flex;overflow:auto}nav button{white-space:nowrap;padding:9px}.sidefoot{display:none}main{padding:18px 13px}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
 @media(max-width:520px){.top h1{font-size:19px}.admin{font-size:10px}.formgrid{grid-template-columns:1fr}.panel{padding:13px}.num{font-size:20px}}
 </style></head>
-<body><div class="layout">
+<body> <div id="loginBox" style="display:block">
+  <h2>St. Martin Exploring Fund</h2>
+  <h3>Admin Login</h3>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="demoLogin()">Login</button>
+  <p id="loginMessage"></p>
+</div>  
+<div class="layout">
 <aside>
  <div class="brand"><div class="logo">✦</div><div><strong>St. Martin<br>Exploring Fund</strong><small>ADMIN CONSOLE</small></div></div>
  <nav>
@@ -76,4 +84,16 @@ function renderRequests(){let rows=requests.map((r,i)=>`<tr><td>${r.name}</td><t
 function setStatus(i,s){requests[i].status=s;renderRequests()}
 function addMember(){let name=document.getElementById("mName").value.trim(),phone=document.getElementById("mPhone").value.trim(),plan=document.getElementById("mPlan").value,amount=Number(document.getElementById("mAmount").value);if(!name||!phone||!amount||amount<1){document.getElementById("memberMsg").textContent="সব তথ্য সঠিকভাবে পূরণ করুন।";return}members.push({id:"SMEF-"+String(members.length+1).padStart(3,"0"),name,phone,plan,amount});renderMembers();document.getElementById("memberMsg").textContent="ডেমো গ্রাহক যোগ হয়েছে। বাস্তব ডাটাবেজে সংরক্ষিত হয়নি।";["mName","mPhone","mAmount"].forEach(id=>document.getElementById(id).value="")}
 renderMembers();renderRequests();
-</script></body></html>  
+function demoLogin() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    document.getElementById("loginMessage").textContent =
+      "ইমেইল ও পাসওয়ার্ড দিন।";
+    return;
+  }
+
+  document.getElementById("loginMessage").textContent =
+    "এটি শুধু ডেমো। আসল লগইন এখনো যুক্ত হয়নি।";
+} </script></body></html>  
