@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>St. Martin Exploring Fund — Admin Demo</title>
+<style>
+:root{--navy:#102a43;--blue:#1769aa;--teal:#18a6a0;--ink:#182433;--muted:#718096;--bg:#f3f7fb;--line:#e4ebf2}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer}.layout{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
+aside{background:linear-gradient(180deg,#102a43,#163f60);color:white;padding:24px 17px;display:flex;flex-direction:column;gap:25px}
+.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#21b6ae,#2877bd);display:grid;place-items:center;font-size:22px}.brand strong{font-size:13px;line-height:1.35}.brand small{display:block;color:#b8d2e5;font-size:10px;margin-top:3px}
+nav{display:grid;gap:6px}nav button{border:0;background:transparent;color:#d7e6f2;text-align:left;padding:11px;border-radius:10px;font-size:13px}nav button.active,nav button:hover{background:#ffffff20;color:#fff}.sidefoot{margin-top:auto;color:#c6d9e8;font-size:11px;line-height:1.6;border:1px solid #ffffff30;padding:12px;border-radius:12px}
+main{padding:27px 32px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px;gap:12px}.eyebrow{font-size:11px;color:var(--teal);font-weight:800;letter-spacing:.08em}.top h1{margin:4px 0 0;color:var(--navy);font-size:25px}.admin{background:white;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:12px}.page{display:none}.page.active{display:block}
+.banner{background:linear-gradient(110deg,#123b5d,#1769aa 70%,#18a6a0);color:#fff;border-radius:18px;padding:23px 25px;margin-bottom:17px}.banner h2{margin:0 0 6px;font-size:21px}.banner p{margin:0;color:#d8e9f5;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:15px 0}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 5px 18px #17324d08}.label{font-size:11px;color:var(--muted)}.num{font-size:23px;font-weight:800;color:var(--navy);margin:7px 0 2px}.sub{font-size:10px;color:#8795a5}.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.panel h3{font-size:15px;color:var(--navy);margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#8190a0;padding:9px 6px;border-bottom:1px solid var(--line);font-weight:650}td{padding:11px 6px;border-bottom:1px solid #eef2f6}tr:last-child td{border:0}.tag{font-size:10px;border-radius:15px;padding:5px 8px;background:#e1f6f2;color:#087e79}.tag.wait{background:#fff3d6;color:#936000}.btn{border:0;background:var(--blue);color:white;border-radius:9px;padding:9px 12px;font-size:11px;font-weight:700}.btn.light{background:#eaf2f9;color:#14527f}.btn.ok{background:#087e79}.btn.warn{background:#fff0d1;color:#815400}.actions{display:flex;gap:6px;flex-wrap:wrap}
+.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:11px;font-weight:700;color:#526273}.field input,.field select{border:1px solid #dce5ed;border-radius:9px;padding:10px;background:white;width:100%;font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.toolbar input{border:1px solid #dce5ed;border-radius:9px;padding:9px 11px;max-width:240px}.note{font-size:11px;line-height:1.6;color:#745819;background:#fffaed;border:1px solid #f0dfb1;border-radius:10px;padding:11px;margin-top:12px}.success{color:#087e79;font-size:11px;margin-top:9px}.footer{text-align:center;color:#8b98a7;font-size:10px;padding:22px 0 5px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{padding:12px;gap:12px}.brand{justify-content:center}nav{display:flex;overflow:auto}nav button{white-space:nowrap;padding:9px}.sidefoot{display:none}main{padding:18px 13px}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+@media(max-width:520px){.top h1{font-size:19px}.admin{font-size:10px}.formgrid{grid-template-columns:1fr}.panel{padding:13px}.num{font-size:20px}}
+</style></head>
+<body><div class="layout">
+<aside>
+ <div class="brand"><div class="logo">✦</div><div><strong>St. Martin<br>Exploring Fund</strong><small>ADMIN CONSOLE</small></div></div>
+ <nav>
+  <button class="active" data-page="overview">▦ ড্যাশবোর্ড</button>
+  <button data-page="members">♙ গ্রাহক ব্যবস্থাপনা</button>
+  <button data-page="requests">৳ জমার অনুরোধ</button>
+  <button data-page="reports">▤ হিসাব ও রিপোর্ট</button>
+  <button data-page="settings">⚙ সেটিংস</button>
+ </nav>
+ <div class="sidefoot">একক অ্যাডমিন অ্যাকাউন্ট<br>এই প্রোটোটাইপে লগইন/ডাটাবেজ নেই। বাস্তব ব্যবহারের আগে নিরাপদ ব্যাকএন্ড লাগবে।</div>
+</aside>
+<main>
+<header class="top"><div><div class="eyebrow">ADMINISTRATION</div><h1 id="title">অ্যাডমিন ড্যাশবোর্ড</h1></div><div class="admin">● একক অ্যাডমিন · Demo</div></header>
+<section class="page active" id="overview">
+ <div class="banner"><h2>স্বাগতম, অ্যাডমিন</h2><p>গ্রাহক, জমার অনুরোধ এবং সঞ্চয়ের হিসাব এক জায়গা থেকে পরিচালনা করুন।</p></div>
+ <div class="stats">
+  <div class="card"><div class="label">মোট গ্রাহক</div><div class="num" id="memberCount">৩</div><div class="sub">ডেমো গ্রাহক</div></div>
+  <div class="card"><div class="label">মোট যাচাইকৃত সঞ্চয়</div><div class="num" id="savedTotal">৳ ১২,৫০০</div><div class="sub">নমুনা হিসাব</div></div>
+  <div class="card"><div class="label">অনুমোদনের অপেক্ষায়</div><div class="num" id="pendingCount">২</div><div class="sub">জমার অনুরোধ</div></div>
+  <div class="card"><div class="label">এই মাসে জমা</div><div class="num">৳ ৩,০০০</div><div class="sub">নমুনা হিসাব</div></div>
+ </div>
+ <div class="grid">
+  <div class="panel"><h3>সাম্প্রতিক জমার অনুরোধ</h3><table><thead><tr><th>গ্রাহক</th><th>মাধ্যম</th><th>পরিমাণ</th><th>অবস্থা</th></tr></thead><tbody id="dashRequests"></tbody></table></div>
+  <div class="panel"><h3>দ্রুত কাজ</h3><div class="actions"><button class="btn" onclick="go('members')">＋ নতুন গ্রাহক</button><button class="btn light" onclick="go('requests')">জমা যাচাই করুন</button></div><div class="note">Transaction ID ও পেমেন্ট স্ট্যাটাস পেমেন্ট প্রদানকারীর নির্ভরযোগ্য পদ্ধতিতে যাচাই না করে জমা অনুমোদন করবেন না।</div></div>
+ </div>
+</section>
+<section class="page" id="members">
+ <div class="panel"><div class="toolbar"><h3>গ্রাহক তালিকা</h3><button class="btn" onclick="document.getElementById('addMember').style.display='block'">＋ গ্রাহক যোগ করুন</button></div>
+ <div id="addMember" style="display:none;background:#f5f9fc;padding:13px;border-radius:12px;margin-bottom:14px">
+  <div class="formgrid"><div class="field"><label>গ্রাহকের নাম</label><input id="mName" placeholder="পূর্ণ নাম"></div><div class="field"><label>মোবাইল নম্বর</label><input id="mPhone" placeholder="01XXXXXXXXX"></div><div class="field"><label>সঞ্চয়ের ধরন</label><select id="mPlan"><option>দৈনিক</option><option selected>সাপ্তাহিক</option><option>মাসিক</option></select></div><div class="field"><label>নির্ধারিত কিস্তি (৳)</label><input id="mAmount" type="number" min="1" placeholder="যেমন ৫০০"></div></div>
+  <button class="btn" onclick="addMember()">ডেমো গ্রাহক সংরক্ষণ</button><button class="btn light" onclick="document.getElementById('addMember').style.display='none'">বন্ধ</button><div id="memberMsg" class="success"></div>
+ </div>
+ <div class="toolbar"><span class="label">নমুনা গ্রাহক তথ্য</span><input id="memberSearch" placeholder="নাম বা আইডি খুঁজুন..." oninput="renderMembers()"></div>
+ <table><thead><tr><th>আইডি</th><th>নাম</th><th>মোবাইল</th><th>পরিকল্পনা</th><th>কিস্তি</th></tr></thead><tbody id="memberRows"></tbody></table></div>
+</section>
+<section class="page" id="requests">
+ <div class="panel"><h3>জমার অনুরোধ যাচাই</h3><p class="label">শুধু ডেমো রেকর্ড। অনুমোদন/বাতিলের পরিবর্তন এই পেজে সাময়িকভাবে দেখা যাবে।</p><table><thead><tr><th>গ্রাহক</th><th>Transaction ID</th><th>মাধ্যম</th><th>পরিমাণ</th><th>অবস্থা</th><th>কাজ</th></tr></thead><tbody id="requestRows"></tbody></table><div class="note">ডেমোতে অনুমোদন বাটন শুধু স্ক্রিনের অবস্থা বদলায়; এটি কোনো বাস্তব পেমেন্ট যাচাই করে না বা প্রকৃত সঞ্চয়ের ব্যালেন্সে টাকা যোগ করে না।</div></div>
+</section>
+<section class="page" id="reports">
+ <div class="panel"><h3>সঞ্চয় রিপোর্ট</h3><div class="stats"><div class="card"><div class="label">যাচাইকৃত মোট</div><div class="num" id="reportTotal">৳ ১২,৫০০</div></div><div class="card"><div class="label">গ্রাহক সংখ্যা</div><div class="num" id="reportMembers">৩</div></div></div><p class="label">বাস্তব সংস্করণে তারিখ অনুযায়ী রিপোর্ট, PDF/Excel এক্সপোর্ট, কিস্তি বকেয়া এবং অডিট লগ যুক্ত হবে।</p></div>
+</section>
+<section class="page" id="settings">
+ <div class="panel"><h3>অ্যাডমিন সেটিংস</h3><div class="formgrid"><div class="field"><label>প্রতিষ্ঠানের নাম</label><input value="St. Martin Exploring Fund" disabled></div><div class="field"><label>অ্যাডমিনের ধরন</label><input value="একক অ্যাডমিন" disabled></div></div><div class="note">বাস্তব সাইটে শক্তিশালী পাসওয়ার্ড, দুই-ধাপ যাচাই, লগইন সীমাবদ্ধতা, HTTPS, নিয়মিত ব্যাকআপ এবং অ্যাডমিন কার্যক্রমের অডিট লগ বাধ্যতামূলকভাবে যুক্ত করুন।</div></div>
+</section>
+<div class="footer">© 2026 St. Martin Exploring Fund · Admin UI Prototype · No real deposits are processed</div>
+</main></div>
+<script>
+const names={overview:"অ্যাডমিন ড্যাশবোর্ড",members:"গ্রাহক ব্যবস্থাপনা",requests:"জমার অনুরোধ",reports:"হিসাব ও রিপোর্ট",settings:"সেটিংস"};
+function go(id){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));document.getElementById("title").textContent=names[id]}
+document.querySelectorAll("nav button").forEach(x=>x.onclick=()=>go(x.dataset.page));
+let members=[{id:"SMEF-001",name:"রহিম উদ্দিন",phone:"01XXXXXXXX1",plan:"সাপ্তাহিক",amount:500},{id:"SMEF-002",name:"করিম আহমেদ",phone:"01XXXXXXXX2",plan:"মাসিক",amount:1000},{id:"SMEF-003",name:"সালমা আক্তার",phone:"01XXXXXXXX3",plan:"দৈনিক",amount:100}];
+let requests=[{name:"রহিম উদ্দিন",trx:"DEMO8K4P2",method:"bKash",amount:500,status:"অপেক্ষমাণ"},{name:"করিম আহমেদ",trx:"DEMO9N5Q1",method:"Nagad",amount:1000,status:"অপেক্ষমাণ"}];
+function renderMembers(){let q=(document.getElementById("memberSearch")?.value||"").toLowerCase();document.getElementById("memberRows").innerHTML=members.filter(m=>(m.name+m.id).toLowerCase().includes(q)).map(m=>`<tr><td>${m.id}</td><td>${m.name}</td><td>${m.phone}</td><td>${m.plan}</td><td>৳ ${m.amount}</td></tr>`).join("");document.getElementById("memberCount").textContent=members.length;document.getElementById("reportMembers").textContent=members.length}
+function renderRequests(){let rows=requests.map((r,i)=>`<tr><td>${r.name}</td><td>${r.trx}</td><td>${r.method}</td><td>৳ ${r.amount}</td><td><span class="tag ${r.status==="অপেক্ষমাণ"?"wait":""}">${r.status}</span></td><td>${r.status==="অপেক্ষমাণ"?`<div class="actions"><button class="btn ok" onclick="setStatus(${i},'ডেমো অনুমোদিত')">অনুমোদন</button><button class="btn warn" onclick="setStatus(${i},'বাতিল')">বাতিল</button></div>`:"—"}</td></tr>`).join("");document.getElementById("requestRows").innerHTML=rows;document.getElementById("dashRequests").innerHTML=requests.slice(0,4).map(r=>`<tr><td>${r.name}</td><td>${r.method}</td><td>৳ ${r.amount}</td><td><span class="tag ${r.status==="অপেক্ষমাণ"?"wait":""}">${r.status}</span></td></tr>`).join("");document.getElementById("pendingCount").textContent=requests.filter(r=>r.status==="অপেক্ষমাণ").length}
+function setStatus(i,s){requests[i].status=s;renderRequests()}
+function addMember(){let name=document.getElementById("mName").value.trim(),phone=document.getElementById("mPhone").value.trim(),plan=document.getElementById("mPlan").value,amount=Number(document.getElementById("mAmount").value);if(!name||!phone||!amount||amount<1){document.getElementById("memberMsg").textContent="সব তথ্য সঠিকভাবে পূরণ করুন।";return}members.push({id:"SMEF-"+String(members.length+1).padStart(3,"0"),name,phone,plan,amount});renderMembers();document.getElementById("memberMsg").textContent="ডেমো গ্রাহক যোগ হয়েছে। বাস্তব ডাটাবেজে সংরক্ষিত হয়নি।";["mName","mPhone","mAmount"].forEach(id=>document.getElementById(id).value="")}
+renderMembers();renderRequests();
+</script></body></html>
