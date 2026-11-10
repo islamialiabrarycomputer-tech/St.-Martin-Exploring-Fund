@@ -1,86 +1,71 @@
 from pathlib import Path
 
 html = r'''<!doctype html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>St. Martin Exploring Fund — Demo</title>
 <style>
-:root{--navy:#102a43;--blue:#1769aa;--teal:#18a6a0;--ink:#182433;--muted:#718096;--bg:#f3f7fb;--line:#e4ebf2}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select{font:inherit}button{cursor:pointer}
-#loginBox{max-width:350px;margin:55px auto;padding:24px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center;box-shadow:0 8px 25px #17324d10}
-#loginBox h2{color:var(--navy);font-size:20px}#loginBox input{display:block;width:100%;padding:11px;margin:12px 0;border:1px solid var(--line);border-radius:9px}
-#loginBox button,.btn{border:0;background:var(--blue);color:white;border-radius:9px;padding:10px 14px;font-size:12px;font-weight:700}
-#loginMessage{font-size:12px;color:#087e79}
-.layout{display:none;min-height:100vh;grid-template-columns:250px 1fr}
-aside{background:linear-gradient(180deg,#102a43,#163f60);color:white;padding:24px 17px;display:flex;flex-direction:column;gap:25px}
-.brand{display:flex;gap:11px;align-items:center}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#21b6ae,#2877bd);display:grid;place-items:center;font-size:22px}.brand strong{font-size:13px}.brand small{display:block;color:#b8d2e5;font-size:10px;margin-top:3px}
-nav{display:grid;gap:6px}nav button{border:0;background:transparent;color:#d7e6f2;text-align:left;padding:11px;border-radius:10px;font-size:13px}nav button.active,nav button:hover{background:#ffffff20;color:#fff}
-.sidefoot{margin-top:auto;color:#c6d9e8;font-size:11px;line-height:1.6;border:1px solid #ffffff30;padding:12px;border-radius:12px}
-main{padding:27px 32px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px;gap:12px}.eyebrow{font-size:11px;color:var(--teal);font-weight:800}.top h1{margin:4px 0 0;color:var(--navy);font-size:25px}.admin,.card,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.admin{font-size:12px}.page{display:none}.page.active{display:block}
-.banner{background:linear-gradient(110deg,#123b5d,#1769aa 70%,#18a6a0);color:#fff;border-radius:18px;padding:23px 25px;margin-bottom:17px}.banner h2{margin:0 0 6px}.banner p{margin:0;color:#d8e9f5;font-size:12px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:15px 0}.label{font-size:11px;color:var(--muted)}.num{font-size:23px;font-weight:800;color:var(--navy);margin:7px 0 2px}.sub{font-size:10px;color:#8795a5}.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.panel h3{font-size:15px;color:var(--navy);margin:0 0 14px}
-table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#8190a0;padding:9px 6px;border-bottom:1px solid var(--line)}td{padding:11px 6px;border-bottom:1px solid #eef2f6}.tag{font-size:10px;border-radius:15px;padding:5px 8px;background:#e1f6f2;color:#087e79}.tag.wait{background:#fff3d6;color:#936000}
-.btn.light{background:#eaf2f9;color:#14527f}.btn.ok{background:#087e79}.btn.warn{background:#fff0d1;color:#815400}.actions{display:flex;gap:6px;flex-wrap:wrap}
-.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:11px;font-weight:700;color:#526273}.field input,.field select{border:1px solid #dce5ed;border-radius:9px;padding:10px;background:white;width:100%;font-size:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.toolbar input{border:1px solid #dce5ed;border-radius:9px;padding:9px 11px;max-width:240px}.note{font-size:11px;line-height:1.6;color:#745819;background:#fffaed;border:1px solid #f0dfb1;border-radius:10px;padding:11px;margin-top:12px}.success{color:#087e79;font-size:11px;margin-top:9px}.footer{text-align:center;color:#8b98a7;font-size:10px;padding:22px 0 5px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}aside{padding:12px;gap:12px}.brand{justify-content:center}nav{display:flex;overflow:auto}nav button{white-space:nowrap;padding:9px}.sidefoot{display:none}main{padding:18px 13px}.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
-@media(max-width:520px){.top h1{font-size:19px}.formgrid{grid-template-columns:1fr}.num{font-size:20px}}
+:root{--navy:#12304a;--blue:#1769aa;--teal:#159b91;--bg:#f3f6fb;--ink:#1c2b39;--muted:#6b7b8c;--line:#e4eaf1}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--ink)}
+button,input{font:inherit}.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-card{width:min(100%,390px);background:white;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 12px 35px #18344d12;text-align:center}
+h1{font-size:21px;margin:0 0 8px;color:var(--navy)}.sub{font-size:14px;color:var(--muted);margin:0 0 22px}
+input{width:100%;padding:12px;border:1px solid #d6e0e9;border-radius:9px;margin:7px 0;outline-color:var(--blue)}
+button{border:0;border-radius:9px;padding:11px 16px;background:var(--blue);color:white;font-weight:700;cursor:pointer}
+.login-card button{width:100%;margin-top:10px}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:15px}
+#app{display:none;min-height:100vh}.top{background:var(--navy);color:white;padding:17px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top strong{font-size:18px}.demo{font-size:12px;background:#ffffff20;padding:6px 10px;border-radius:20px}
+.shell{display:flex;max-width:1200px;margin:auto}.side{width:220px;padding:20px 12px}.side button{display:block;width:100%;text-align:left;margin:5px 0;background:transparent;color:var(--ink);font-weight:600}.side button.active,.side button:hover{background:#e3eff9;color:var(--blue)}
+main{flex:1;padding:22px;min-width:0}.page-title{font-size:23px;margin:0 0 18px;color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 5px 18px #18344d08}.label{color:var(--muted);font-size:13px}.value{font-size:25px;font-weight:700;margin-top:9px;color:var(--navy)}
+table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:14px}th{background:#edf3f8;color:var(--navy)}
+.notice{background:#fff8e6;border:1px solid #f0dfb4;color:#735a1c;padding:12px;border-radius:10px;margin:0 0 16px;font-size:13px}
+.panel{background:white;border:1px solid var(--line);padding:18px;border-radius:13px;margin-top:15px}
+@media(max-width:650px){.shell{display:block}.side{width:auto;display:flex;overflow:auto;padding:10px}.side button{white-space:nowrap;width:auto}.side button.active{border-radius:8px}main{padding:15px}.top{padding:15px}}
 </style>
 </head>
 <body>
-<div id="loginBox">
-<h2>St. Martin Exploring Fund</h2><h3>Admin Demo Login</h3>
-<input id="email" type="email" placeholder="কাল্পনিক ইমেইল">
-<input id="password" type="password" placeholder="কাল্পনিক পাসওয়ার্ড">
-<button onclick="demoLogin()">ডেমোতে প্রবেশ</button>
-<p id="loginMessage"></p>
-<p class="label">এটি শুধু প্রদর্শনী। আসল লগইন বা অর্থ লেনদেন নেই।</p>
+<div id="login" class="login-wrap">
+  <section class="login-card">
+    <h1>St. Martin Exploring Fund</h1>
+    <p class="sub">Admin Demo Login</p>
+    <input id="email" type="email" placeholder="ডেমো ইমেইল লিখুন" autocomplete="off">
+    <input id="password" type="password" placeholder="ডেমো পাসওয়ার্ড লিখুন" autocomplete="off">
+    <button type="button" onclick="demoLogin()">ডেমো লগইন</button>
+    <p class="hint">এটি শুধু শেখার জন্য একটি ডেমো। যেকোনো কাল্পনিক ইমেইল ও পাসওয়ার্ড লিখে প্রবেশ করুন। এখানে বাস্তব লগইন বা টাকা লেনদেন হয় না।</p>
+  </section>
 </div>
-<div class="layout">
-<aside>
-<div class="brand"><div class="logo">✦</div><div><strong>St. Martin<br>Exploring Fund</strong><small>DEMO CONSOLE</small></div></div>
-<nav>
-<button class="active" data-page="overview">▦ ড্যাশবোর্ড</button><button data-page="members">♙ নমুনা সদস্য</button><button data-page="requests">৳ নমুনা অনুরোধ</button><button data-page="reports">▤ রিপোর্ট</button><button data-page="settings">⚙ সেটিংস</button>
-</nav>
-<div class="sidefoot">শুধু কাল্পনিক ডেমো তথ্য। কোনো বাস্তব গ্রাহক বা অর্থের হিসাব নয়।</div>
-</aside>
-<main>
-<header class="top"><div><div class="eyebrow">DEMO ADMINISTRATION</div><h1 id="title">ডেমো ড্যাশবোর্ড</h1></div><div class="admin">● Demo</div></header>
-<section class="page active" id="overview">
-<div class="banner"><h2>স্বাগতম!</h2><p>এটি শেখার জন্য তৈরি একটি নমুনা ড্যাশবোর্ড।</p></div>
-<div class="stats">
-<div class="card"><div class="label">নমুনা সদস্য</div><div class="num" id="memberCount">৩</div><div class="sub">কাল্পনিক তথ্য</div></div>
-<div class="card"><div class="label">নমুনা মোট</div><div class="num">৳ ১২,৫০০</div><div class="sub">বাস্তব টাকা নয়</div></div>
-<div class="card"><div class="label">নমুনা অনুরোধ</div><div class="num" id="pendingCount">২</div><div class="sub">কাল্পনিক রেকর্ড</div></div>
-<div class="card"><div class="label">এই মাসে</div><div class="num">৳ ৩,০০০</div><div class="sub">নমুনা হিসাব</div></div>
-</div>
-<div class="grid"><div class="panel"><h3>সাম্প্রতিক নমুনা অনুরোধ</h3><table><thead><tr><th>নাম</th><th>মাধ্যম</th><th>পরিমাণ</th><th>অবস্থা</th></tr></thead><tbody id="dashRequests"></tbody></table></div><div class="panel"><h3>দ্রুত কাজ</h3><button class="btn" onclick="go('members')">নমুনা সদস্য দেখুন</button><div class="note">কোনো বাস্তব পেমেন্ট বা জমা এখানে গ্রহণ বা যাচাই করা হয় না।</div></div></div>
-</section>
-<section class="page" id="members"><div class="panel"><div class="toolbar"><h3>নমুনা সদস্য তালিকা</h3><input id="memberSearch" placeholder="নাম খুঁজুন" oninput="renderMembers()"></div><table><thead><tr><th>আইডি</th><th>নাম</th><th>পরিকল্পনা</th><th>নমুনা কিস্তি</th></tr></thead><tbody id="memberRows"></tbody></table></div></section>
-<section class="page" id="requests"><div class="panel"><h3>নমুনা অনুরোধ</h3><p class="label">নিচের বাটন শুধু পর্দায় ডেমো অবস্থা বদলায়।</p><table><thead><tr><th>নাম</th><th>ডেমো রেফারেন্স</th><th>মাধ্যম</th><th>পরিমাণ</th><th>অবস্থা</th><th>কাজ</th></tr></thead><tbody id="requestRows"></tbody></table></div></section>
-<section class="page" id="reports"><div class="panel"><h3>নমুনা রিপোর্ট</h3><p>মোট নমুনা: ৳ ১২,৫০০</p><p class="label">এই পরিসংখ্যান বাস্তব আর্থিক তথ্য নয়।</p></div></section>
-<section class="page" id="settings"><div class="panel"><h3>সেটিংস</h3><p>St. Martin Exploring Fund — Demo</p><p class="note">এই ওয়েবসাইটে বাস্তব লগইন, ডাটাবেজ, গ্রাহকের তথ্য বা পেমেন্ট ব্যবস্থা নেই।</p><button class="btn light" onclick="logoutDemo()">ডেমো থেকে বের হন</button></div></section>
-<div class="footer">© 2026 · Learning Demo · No real deposits or payments</div>
-</main>
+<div id="app">
+  <header class="top"><strong>St. Martin Exploring Fund</strong><span class="demo">DEMO ONLY</span></header>
+  <div class="shell">
+    <nav class="side">
+      <button class="active" data-page="overview" onclick="showPage('overview',this)">ওভারভিউ</button>
+      <button data-page="members" onclick="showPage('members',this)">নমুনা সদস্য</button>
+      <button data-page="requests" onclick="showPage('requests',this)">নমুনা অনুরোধ</button>
+      <button data-page="reports" onclick="showPage('reports',this)">রিপোর্ট</button>
+      <button data-page="settings" onclick="showPage('settings',this)">সেটিংস</button>
+      <button onclick="logout()">লগআউট</button>
+    </nav>
+    <main id="content"></main>
+  </div>
 </div>
 <script>
-const names={overview:"ডেমো ড্যাশবোর্ড",members:"নমুনা সদস্য",requests:"নমুনা অনুরোধ",reports:"রিপোর্ট",settings:"সেটিংস"};
-function go(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("title").textContent=names[id]}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
-const members=[{id:"DEMO-001",name:"রহিম (নমুনা)",plan:"সাপ্তাহিক",amount:500},{id:"DEMO-002",name:"করিম (নমুনা)",plan:"মাসিক",amount:1000},{id:"DEMO-003",name:"সালমা (নমুনা)",plan:"দৈনিক",amount:100}];
-const requests=[{name:"রহিম (নমুনা)",trx:"SAMPLE-001",method:"Demo",amount:500,status:"অপেক্ষমাণ"},{name:"করিম (নমুনা)",trx:"SAMPLE-002",method:"Demo",amount:1000,status:"অপেক্ষমাণ"}];
-function renderMembers(){const q=(document.getElementById("memberSearch").value||"").toLowerCase();document.getElementById("memberRows").innerHTML=members.filter(m=>(m.name+m.id).toLowerCase().includes(q)).map(m=>`<tr><td>${m.id}</td><td>${m.name}</td><td>${m.plan}</td><td>৳ ${m.amount}</td></tr>`).join("")}
-function renderRequests(){const rows=requests.map((r,i)=>`<tr><td>${r.name}</td><td>${r.trx}</td><td>${r.method}</td><td>৳ ${r.amount}</td><td><span class="tag ${r.status==="অপেক্ষমাণ"?"wait":""}">${r.status}</span></td><td>${r.status==="অপেক্ষমাণ"?`<div class="actions"><button class="btn ok" onclick="setStatus(${i},'ডেমো অনুমোদিত')">ডেমো অনুমোদন</button><button class="btn warn" onclick="setStatus(${i},'বাতিল')">বাতিল</button></div>`:"—"}</td></tr>`).join("");document.getElementById("requestRows").innerHTML=rows;document.getElementById("dashRequests").innerHTML=requests.map(r=>`<tr><td>${r.name}</td><td>${r.method}</td><td>৳ ${r.amount}</td><td>${r.status}</td></tr>`).join("");document.getElementById("pendingCount").textContent=requests.filter(r=>r.status==="অপেক্ষমাণ").length}
-function setStatus(i,s){requests[i].status=s;renderRequests()}
-function demoLogin(){const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;if(!email||!password){document.getElementById("loginMessage").textContent="কাল্পনিক ইমেইল ও পাসওয়ার্ড লিখুন।";return}document.getElementById("loginBox").style.display="none";document.querySelector(".layout").style.display="grid"}
-function logoutDemo(){document.querySelector(".layout").style.display="none";document.getElementById("loginBox").style.display="block";document.getElementById("email").value="";document.getElementById("password").value="";document.getElementById("loginMessage").textContent=""}
-renderMembers();renderRequests();
+const pages={
+overview:`<h2 class="page-title">ড্যাশবোর্ড ওভারভিউ</h2><div class="notice">এখানে দেখানো সব তথ্য কাল্পনিক নমুনা। এটি কোনো বাস্তব তহবিল বা আর্থিক সেবা নয়।</div><div class="cards"><div class="card"><div class="label">নমুনা সদস্য</div><div class="value">১২</div></div><div class="card"><div class="label">নমুনা জমা</div><div class="value">৳ ১৮,০০০</div></div><div class="card"><div class="label">নমুনা অনুরোধ</div><div class="value">৩</div></div></div><div class="panel"><b>স্বাগতম!</b><p>St. Martin Exploring Fund ডেমো ড্যাশবোর্ডে আপনাকে স্বাগতম।</p></div>`,
+members:`<h2 class="page-title">নমুনা সদস্য তালিকা</h2><div class="notice">নিচের নাম ও তথ্য সম্পূর্ণ কাল্পনিক।</div><table><tr><th>আইডি</th><th>নাম</th><th>অবস্থা</th></tr><tr><td>DEMO-001</td><td>নমুনা সদস্য ১</td><td>সক্রিয়</td></tr><tr><td>DEMO-002</td><td>নমুনা সদস্য ২</td><td>সক্রিয়</td></tr><tr><td>DEMO-003</td><td>নমুনা সদস্য ৩</td><td>পরীক্ষামূলক</td></tr></table>`,
+requests:`<h2 class="page-title">নমুনা অনুরোধ</h2><div class="notice">এগুলো কেবল প্রদর্শনের জন্য; কোনো অর্থ গ্রহণ বা পরিশোধ হয় না।</div><table><tr><th>রেফারেন্স</th><th>বিবরণ</th><th>অবস্থা</th></tr><tr><td>REQ-DEMO-01</td><td>নমুনা অনুরোধ</td><td>অপেক্ষমাণ</td></tr><tr><td>REQ-DEMO-02</td><td>নমুনা অনুরোধ</td><td>পর্যালোচনা</td></tr></table>`,
+reports:`<h2 class="page-title">রিপোর্ট</h2><div class="panel"><b>ডেমো সারাংশ</b><p>মোট নমুনা এন্ট্রি: ১২</p><p>নমুনা হিসাবের পরিমাণ: ৳ ১৮,০০০</p><p class="label">সব পরিসংখ্যান কাল্পনিক এবং শেখার উদ্দেশ্যে তৈরি।</p></div>`,
+settings:`<h2 class="page-title">সেটিংস</h2><div class="panel"><b>ডেমো সেটিংস</b><p>ওয়েবসাইটের নাম: St. Martin Exploring Fund</p><p>মোড: Static HTML Demo</p><p class="label">এই সাইটে বাস্তব অ্যাকাউন্ট, ডেটাবেস বা পেমেন্ট ব্যবস্থা যুক্ত নেই।</p></div>`
+};
+function demoLogin(){const e=document.getElementById('email').value.trim();const p=document.getElementById('password').value.trim();if(!e||!p){alert('ডেমো ইমেইল ও পাসওয়ার্ড—দুটিই লিখুন।');return;}document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';showPage('overview',document.querySelector('[data-page="overview"]'));}
+function showPage(name,btn){document.getElementById('content').innerHTML=pages[name]||pages.overview;document.querySelectorAll('.side button[data-page]').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');}
+function logout(){document.getElementById('app').style.display='none';document.getElementById('login').style.display='grid';document.getElementById('email').value='';document.getElementById('password').value='';}
 </script>
 </body>
-</html>
-'''
-path = Path("/mnt/data/index.html")
+</html>'''
+
+path = Path("/mnt/data/index-clean.html")
 path.write_text(html, encoding="utf-8")
-print(f"তৈরি হয়েছে: {path} ({path.stat().st_size} bytes)")
+print(f"পরিষ্কার HTML ফাইল তৈরি হয়েছে: {path.name} ({path.stat().st_size:,} bytes)")
